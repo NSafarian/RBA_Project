@@ -17,24 +17,47 @@ adhere to the recommendations provided by GATK on their website:
 <https://gatk.broadinstitute.org/hc/en-us/articles/360035890471-Hard-filtering-germline-short-variants>.
 
 ### 1.1. FisherStrand (FS)
+This is the Phred-scaled probability that measures strand bias at the site. Strand Bias tells us whether the
+alternate allele was seen more or less often on the forward or reverse strand than the reference allele. The threshold value for filtering variants is set at 60 (we keep the variants with FS <= 60).  
 
 ### 1.2. RMSMappingQuality (MQ)
+This is the root mean square mapping quality over all the reads at the site. When the mapping qualities are good at a site, the MQ will be around 60. We keep the variants with MQ >= 40.  
 
 ### 1.3. ReadPosRankSumTest (ReadPosRankSum)
-
-### 1.4. StrandOddsRatio (SOR)
+This is the u-based z-approximation from the Rank Sum Test for site position within reads. It compares whether the positions of the reference and alternate alleles are different within the reads. Seeing an allele only near the ends of reads is indicative of error, because that is where sequencers tend to make the most errors. A negative value indicates that the alternate allele is found at the ends of reads more often than the reference allele; a positive value indicates that the reference allele is found at the ends of reads more often than the alternate allele. A value close to zero is best because it indicates there is little difference between the positions of the reference and alternate alleles in the reads. We remove any variant with a ReadPosRankSum value less than -8.0.
 
 ### 1.5. QUAL
+Quality: Phred-scaled quality score for the assertion made in alternative allele (ALT). We keep variants with a QUAL score <=30.
 
 ### 1.6. Typeseq_priority
+We keep only "Exonic" variants.
 
 ### 1.7. Effect_priority
+We  filter out all synonymous variants and keep all non-synonymous, stop, loss, gain, frameshift mutations. 
 
 ### 1.8. Freq_max
+We selected only variants with freq_max <5%. 
 
 
+## 2. Perform QC 
 
+Remember, we have one data file per individual/sample ID. The objective is to filter out undesired variants in each data file and and then segment the final output into separate files for each chromosome. 
+![Filtering](https://github.com/NSafarian/RBA_Project/assets/102309428/577b55c8-e0da-498b-b2bc-0123b10dcedb)
 
+The following scripts are designed for that purpose:
+### Script 1: we name it **"Filter_data.sh"**
+```{bash}
+
+```
+### Script 2: we name it **"Exe_Filter_data.sh"**
+```{bash}
+
+```
+
+To run the script in bash/Linux you need to type 
+```{bash}
+
+```
 
 
 
