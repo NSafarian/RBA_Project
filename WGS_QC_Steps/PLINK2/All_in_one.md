@@ -1,12 +1,7 @@
-# Step-by-step tutorial to QC WGS dataset:
-#It is essential for the execution of the tutorial that that all scripts belonging to this tutorial are in 
-#the same directory on your UNIX workstation.
+# Step-by-step tutorial for QC of WES dataset:
+To ensure the successful execution of this tutorial, it's essential that the data structure/format and QC variables align with those utilized herein. In this tutorial we'll use the annotated format of WES data which consist of separate files for each individual sample. For instance, the SP0000017.tsv data file in the SPARK_WES2 cohort represents WES data for **sample ID** SP000017, formatted as a tab-delimited file (**.tsv**). If the data isn't organized on a per-individual basis, is aggregated across samples per chromosome, or if is in a .vcf format, adjustments in the codes may be necessary. At times, all QC metrics might not be included in the annotated files, necessitating a check for the available variables. 
 
 ## Data Preparation
-#The variant call format of WGS data might come as separate files per individual smaple or chromosome. 
-#In case you need to work on a specific set of cromosomes (e.g., autosomes), you may choose to concatenate those
-#separate files into one single file and run the QC steps on that file.
-
 ### Concatenate separate .vcf.gz files into one file run:
 ```{bash}
 bcftools concat path/to/WGSData.chr{1..22}.vcf.gz -Oz -o /Destination/path/WGS_auto.vcf.gz
