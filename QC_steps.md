@@ -100,7 +100,7 @@ done;
 bash Exe_Filter_data.sh
 
 ```
-
+Now you have 22 folders (one per autosome) whithin each there is one filtered-data-file per individual/SampleID.
 
 
 
