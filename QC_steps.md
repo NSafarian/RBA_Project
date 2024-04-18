@@ -59,7 +59,9 @@ Here is the description of columns:
  - column #39: ReadPosRankSum
  - column #72: effect_priority
  - column #226: Freq_max
-Note that the column number in your data might be different.   
+   
+**Note that the column number in your data might be different.**
+
 ```{bash}
 #!/usr/bin/env bash
 
@@ -80,6 +82,7 @@ done;
 
 #### *Step 2: make the second script and name it **"Exe_Filter_data.sh"***
 This script is crafted to execute the filtering steps outlined above for each chromosome within every data file. Iterating/looping over each chromosome significantly speeds up the entire process, proving highly advantageous when handling numerous files.
+
 ```{bash}
 #!/usr/bin/env bash
 
@@ -91,9 +94,11 @@ done;
 ```
 
 #### *Step 3: Run the filtering steps in a Linux/bash terminal*
+
 ```{bash}
 #simply run:
 bash Exe_Filter_data.sh
+
 ```
 
 
