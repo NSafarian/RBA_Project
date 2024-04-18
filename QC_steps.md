@@ -88,7 +88,7 @@ This script is crafted to execute the filtering steps outlined above for each ch
 
 for chr in `seq 1 22`;
 do
-  sbatch --time=3-03:00:00 --nodes=1 --mem=32GB myscript_SPR2.sh $chr
+  sbatch --time=3-03:00:00 --nodes=1 --mem=32GB Filter_data.sh $chr
 done;
 
 ```
