@@ -33,13 +33,19 @@ This is the u-based z-approximation from the Rank Sum Test for site position wit
 #### *1.5. QUAL*
 Quality: Phred-scaled quality score for the assertion made in alternative allele (ALT). Variants with a QUAL score <=30 are usually retained.
 
-#### *1.6. Typeseq_priority*
+#### *1.6. StrandOddsRatio (SOR)*
+It's a measure of strand bias (like FS). Most variants have an SOR value less than 3, and almost all variants have an SOR value less than 9. We usually retain variants with SOR > 3.
+
+#### *1.7.  MappingQualityRankSumTest (MQRankSum)*
+An index of mapping qualities of the reads. A positive value means the mapping qualities of the reads supporting the alternate allele are higher than those supporting the reference allele; a negative value indicates the mapping qualities of the reference allele are higher than those supporting the alternate allele. A value close to zero is best and indicates little difference between the mapping qualities. The hard filter threshold is set at -12.5, meaning to remove the variants having values less than -12.5.
+
+#### *1.8. Typeseq_priority*
 The type of sequence surrounding each variant can vary, including exonic, intergenic, intronic, splicing sites, and more. For our study, we retain only the "Exonic" variants.
 
-#### *1.7. Effect_priority*
+#### *1.9. Effect_priority*
 The impact of variants on a transcript or protein can be classified as synonymous, non-synonymous, frameshift, stop, loss or gain of function, etc. In this study, we filter out all synonymous variants.
 
-#### *1.8. Freq_max*
+#### *1.10. Freq_max*
 The current study exclusively examines low frequency variants (i.e., alleles with a maximum frequency of less than 5%).
 
 
