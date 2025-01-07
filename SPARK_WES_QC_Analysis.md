@@ -80,7 +80,7 @@ zcat data_file.tsv.gz | awk -F $'\t' 'NR == 1 || ($194 < 0.15 &&($35 ~/exonic/ |
 The size of the data are much reduced now and the rest of analysis can be 
 performed in R.
 
-#### 2.1. load the packages
+#### 2.1. load the R packages
 ```{r}
 
 library(tidyverse)
