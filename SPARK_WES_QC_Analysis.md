@@ -397,10 +397,11 @@ stages where the SNVs count discrepancies occur.
 3. Sample:DP >10
 4. gnomAD_exome211_FILTER =='PASS'
 
-Note:  I used  the HQ column to call in the high quality variants in the New/GLNexus version.
+Note:  I used  the high_quality (HQ) column to call in the high quality variants in the New/GLNexus version.
 
 
-###### **C.1. For the Old-GATK WES1 data:**
+##### **C.1. For the Old-GATK WES1 data:**
+
 ```{r}
 
 # metrics:
@@ -473,7 +474,8 @@ for (df in old_sub_versions) {
 ```
 
 
-###### **C.2. For the New_GLNexus WES1 data:**
+##### **C.2. For the New_GLNexus WES1 data:**
+
 ```{r}
 
 # metrics:
@@ -523,9 +525,10 @@ for (df in new_sub_versions) {
 
 ```{r}
 
+# plot Sample:DP (before and after filtering)
+
 library(cowplot)
 
-# plot Sample:DP (before and after filtering)
 p1 <- new_dt_sub.1%>%
   ggplot(aes(x=`Sample:DP`))+
   geom_density(size=1, color= '#28827A') +  
@@ -563,6 +566,8 @@ plot_grid(p1, p2)
 
 
 ```{r}
+
+# plot Sample:GQ (i.e., Genotype Quality before and after filtering)
 
 library(viridis)
 # use scale_color_viridis_d() instead if you prefer. 
@@ -610,7 +615,7 @@ plot_grid(p3, p4)
 ```
 
 
-###### **C.3. For the Elemi-sub1 data:**
+##### **C.3. For the Elemi-sub1 data:**
 
 If I run the QC steps (as outlined in section **C.1**) on the Elemi-sub1 data, the output contains 1,874 unique varIDs. This significant difference between my results and Elemi's data prompted me to examine the position (POS) of the variants. Below are the results of this analysis:
 
