@@ -37,6 +37,7 @@ typseq_priority class of Exonic| Exonic;splicing from chr22.
 #### *1.1. Prep the Old/GATK version of SPARK-WES1*
 
 The path to the original data files is:
+
 `*/hpf/largeprojects/tcagstor/tcagstor_tmp/ebreetvelt/ASD_data/variants/SPARK_WES_1/*`.
 
 Note that this data is one data_file per sample, and there are 27,255 samples/data_files 
@@ -56,6 +57,7 @@ zcat data_file.tsv.gz | awk -F $'\t' -v chr="22" 'NR == 1 || ($226 < 0.15 &&($67
 
 #### *1.2. Prep the New/GLNexus version of SPARK-WES1*
 This data to the original data is:
+
 `/hpf/largeprojects/tcagstor/tcagstor_tmp/ebreetvelt/ASD_data/SPARK_WES_1-5_combined_calls+annotations/chr22/`
 
 Note that this data is already split by chromosome, and every 300 samples are 
@@ -92,6 +94,7 @@ library(knitr)
 #### Import the metadata
 
 The path to the SPARK-WES1 metadata is:
+
 `/hpf/largeprojects/tcagstor/tcagstor_tmp/ebreetvelt/ASD_data/metadata/`
 
 ```{r, echo=FALSE}
