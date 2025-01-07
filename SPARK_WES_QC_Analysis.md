@@ -361,13 +361,12 @@ The only reason I preformed the above steps in R was to visualize the data in
 each step and fill the report. The updated bash code to run these steps would be:
 
 ```{bash}
-
-zcat data_file.tsv.gz | awk -F $'\t' -v chr="22" 'NR == 1 || ($226 < 0.15 && ($67 ~/exonic/ || $67 ~/exonic;splicing/) && ($72 ~/nonsynonymous/ || $72 ~/start/ || $72 ~/frameshift/ || $72 ~/stop/))' | gzip > $output_dir/chr22_exonic_Old_data.tsv.gz
-
-
+#!/usr/bin/bash
 #column 226 is freq_max
 #column 67 is typeseq_priority
 #column 72 is effect_priority
+
+zcat data_file.tsv.gz | awk -F $'\t' -v chr="22" 'NR == 1 || ($226 < 0.15 && ($67 ~/exonic/ || $67 ~/exonic;splicing/) && ($72 ~/nonsynonymous/ || $72 ~/start/ || $72 ~/frameshift/ || $72 ~/stop/))' | gzip > $output_dir/chr22_exonic_Old_data.tsv.gz
 
 ```
 
