@@ -29,12 +29,12 @@ The comparison involves four data sets:
 4. Elemi-shared Sub2 data
 
 
-### **Step 1: Data_preparation**
+### **1. Data_preparation**
 
 I will first show the code I used to extract variants with freq_max <0.15 and 
 typseq_priority class of Exonic| Exonic;splicing from chr22. 
 
-#### *1.1. Prep the Old/GATK version of SPARK-WES1*
+#### ***1.1. Prep the Old/GATK version of SPARK-WES1***
 
 The path to the original data files is:
 
@@ -55,7 +55,7 @@ zcat data_file.tsv.gz | awk -F $'\t' -v chr="22" 'NR == 1 || ($226 < 0.15 &&($67
 ```
 
 
-#### *1.2. Prep the New/GLNexus version of SPARK-WES1*
+#### ***1.2. Prep the New/GLNexus version of SPARK-WES1***
 This data to the original data is:
 
 `/hpf/largeprojects/tcagstor/tcagstor_tmp/ebreetvelt/ASD_data/SPARK_WES_1-5_combined_calls+annotations/chr22/`
@@ -75,12 +75,12 @@ zcat data_file.tsv.gz | awk -F $'\t' 'NR == 1 || ($194 < 0.15 &&($35 ~/exonic/ |
 
 ```
 
-### **Step 2: Analysis**
+### **2. Data Analysis**
 
 The size of the data are much reduced now and the rest of analysis can be 
 performed in R.
 
-#### load the packages
+#### 2.1. load the packages
 ```{r}
 
 library(tidyverse)
@@ -91,7 +91,7 @@ library(knitr)
 ```
 
 
-#### Import the metadata
+#### 2.2. Import the metadata
 
 The path to the SPARK-WES1 metadata is:
 
@@ -116,7 +116,7 @@ wes3_SampIDs <- wes3_meta$`Sample ID` #16773
 ```
 
 
-#### Import the preped SPARK-WES1 variants data (Chr22-LFvars-Exonic) 
+#### 2.3. Import the preped SPARK-WES1 variants data (Chr22-LFvars-Exonic) 
 
 I have concatenated all data_files from all samples into one single file, which
 will be used here: 
@@ -150,7 +150,7 @@ Elemi_sub2 <- readr::read_tsv(file.path(var_data_dir,"Elemi_shared_data/substrac
 ```
 
 
-#### Comparisons:
+#### 2.4. Comparisons:
 I will compare the data sets at two levels: **A. sample-level**, **B. variants-level**.
 
 ##### **A. Sample-level comparisons**
