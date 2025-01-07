@@ -38,7 +38,7 @@ typseq_priority class of Exonic| Exonic;splicing from chr22.
 
 The path to the original data files is:
 
-`*/hpf/largeprojects/tcagstor/tcagstor_tmp/ebreetvelt/ASD_data/variants/SPARK_WES_1/*`.
+`/hpf/largeprojects/tcagstor/tcagstor_tmp/ebreetvelt/ASD_data/variants/SPARK_WES_1/`.
 
 Note that this data is one data_file per sample, and there are 27,255 samples/data_files 
 to process. For the purpose of simplicity, below I only show a one line code for one  data_file. 
