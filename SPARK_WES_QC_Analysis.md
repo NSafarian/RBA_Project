@@ -12,7 +12,7 @@
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## **Background**
+### **Background**
 
 Quality control (QC) for Whole Exome Sequencing (WES) data relies on various metrics. 
 Some of the metrics previously available in the GATK variant calling pipeline are no longer
@@ -29,12 +29,12 @@ The comparison involves four data sets:
 4. Elemi-shared Sub2 data
 
 
-## **Step 1: Data_preparation**
+### **Step 1: Data_preparation**
 
 I will first show the code I used to extract variants with freq_max <0.15 and 
 typseq_priority class of Exonic| Exonic;splicing from chr22. 
 
-### *Prep the Old/GATK version of SPARK-WES1*
+#### *1.1. Prep the Old/GATK version of SPARK-WES1*
 
 The path to the original data files is:
 `*/hpf/largeprojects/tcagstor/tcagstor_tmp/ebreetvelt/ASD_data/variants/SPARK_WES_1/*`.
@@ -54,7 +54,7 @@ zcat data_file.tsv.gz | awk -F $'\t' -v chr="22" 'NR == 1 || ($226 < 0.15 &&($67
 ```
 
 
-### *Prep the New/GLNexus version of SPARK-WES1*
+#### *1.2. Prep the New/GLNexus version of SPARK-WES1*
 This data to the original data is:
 `/hpf/largeprojects/tcagstor/tcagstor_tmp/ebreetvelt/ASD_data/SPARK_WES_1-5_combined_calls+annotations/chr22/`
 
@@ -73,12 +73,12 @@ zcat data_file.tsv.gz | awk -F $'\t' 'NR == 1 || ($194 < 0.15 &&($35 ~/exonic/ |
 
 ```
 
-## **Step 2: Analysis**
+### **Step 2: Analysis**
 
 The size of the data are much reduced now and the rest of analysis can be 
 performed in R.
 
-### load the packages
+#### load the packages
 ```{r}
 
 library(tidyverse)
@@ -89,7 +89,7 @@ library(knitr)
 ```
 
 
-### Import the metadata
+#### Import the metadata
 
 The path to the SPARK-WES1 metadata is:
 `/hpf/largeprojects/tcagstor/tcagstor_tmp/ebreetvelt/ASD_data/metadata/`
@@ -113,7 +113,7 @@ wes3_SampIDs <- wes3_meta$`Sample ID` #16773
 ```
 
 
-### Import the preped SPARK-WES1 variants data (Chr22-LFvars-Exonic) 
+#### Import the preped SPARK-WES1 variants data (Chr22-LFvars-Exonic) 
 
 I have concatenated all data_files from all samples into one single file, which
 will be used here: 
@@ -147,10 +147,10 @@ Elemi_sub2 <- readr::read_tsv(file.path(var_data_dir,"Elemi_shared_data/substrac
 ```
 
 
-### Comparisons:
+#### Comparisons:
 I will compare the data sets at two levels: **A. sample-level**, **B. variants-level**.
 
-#### **A. Sample-level comparisons**
+##### **A. Sample-level comparisons**
 
 ```{r}
 
@@ -244,7 +244,7 @@ Elemi_dt_sub2 <- Elemi_sub2%>% subset(X.Sample_id%in% common_ids)
 ```
 
 
-#### **B. Variants-level comparisons**
+##### **B. Variants-level comparisons**
 
 The 4 datasets share the Identical Sample_IDs (n=24,499). Now, I'll make sure 
 that variants in all 4 datasets are also the same in terms of:
@@ -369,7 +369,7 @@ zcat data_file.tsv.gz | awk -F $'\t' -v chr="22" 'NR == 1 || ($226 < 0.15 && ($6
 ```
 
 
-#### **C. ASSESSING THE QC METRICS STEP_BY_STEP**
+##### **C. ASSESSING THE QC METRICS STEP_BY_STEP**
 
 Now that the 4 datasets share:
 1. Identical Sample_IDs (n=24,499),
@@ -380,7 +380,7 @@ Now that the 4 datasets share:
 I will conduct a step-by-step quality control (QC) analysis to identify the 
 stages where the SNVs count discrepancies occur.
 
-##### **Old QC metrics are:**
+###### **Old QC metrics are:**
 1. QUAL >= 30
 2. FS <=60
 3. ReadPosRankSum	>=-8
@@ -389,7 +389,7 @@ stages where the SNVs count discrepancies occur.
 6. MappingQualityRankSumTest (MQRankSum)	>-12.5
 7. gnomAD_exome211_FILTER =='PASS'
 
-##### **New QC metrics are:**
+###### **New QC metrics are:**
 1. QUAL >=30
 2. Sample:GQ>20
 3. Sample:DP >10
@@ -398,7 +398,7 @@ stages where the SNVs count discrepancies occur.
 Note:  I used  the HQ column to call in the high quality variants in the New/GLNexus version.
 
 
-##### **C.1. For the Old-GATK WES1 data:**
+###### **C.1. For the Old-GATK WES1 data:**
 ```{r}
 
 # metrics:
@@ -471,7 +471,7 @@ for (df in old_sub_versions) {
 ```
 
 
-##### **C.2. For the New_GLNexus WES1 data:**
+###### **C.2. For the New_GLNexus WES1 data:**
 ```{r}
 
 # metrics:
@@ -608,7 +608,7 @@ plot_grid(p3, p4)
 ```
 
 
-##### **C.3. For the Elemi-sub1 data:**
+###### **C.3. For the Elemi-sub1 data:**
 
 If I run the QC steps (as outlined in section **C.1**) on the Elemi-sub1 data, the output contains 1,874 unique varIDs. This significant difference between my results and Elemi's data prompted me to examine the position (POS) of the variants. Below are the results of this analysis:
 
