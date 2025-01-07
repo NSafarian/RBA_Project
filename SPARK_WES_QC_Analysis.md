@@ -1,11 +1,12 @@
 
-title: "SPARK_WES QC Report"
-author: "Nickie Safarian"
-date: "2025-01-06"
-output:
+```
+# Title: "SPARK_WES QC Report"
+# Author: "Nickie Safarian"
+# Date: "2025-01-06"
+# output:
   html_document: default
   pdf_document: default
-
+```
 
 ```{r}
 knitr::opts_chunk$set(echo = TRUE)
